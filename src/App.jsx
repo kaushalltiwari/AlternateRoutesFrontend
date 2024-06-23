@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import SearchArea from './SearchArea/searchArea.jsx'
+import SearchArea from './Components/SearchArea/searchArea.jsx'
 import Header from './header.jsx'
 
 function App() {
