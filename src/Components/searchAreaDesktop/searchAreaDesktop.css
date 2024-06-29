@@ -1,0 +1,20 @@
+.vertical-line {
+    border-right: 2px solid #000; /* Adjust the color and width as needed */
+    height: 8%; /* Full height of the parent container */
+}
+
+.queryInfo:hover {
+    background-color: #ff0000
+}  
+
+.test{
+    margin-bottom: -10px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.drp{
+    /* position: none !important; */
+    margin-top: -50px !important;
+    z-index: 3;
+}

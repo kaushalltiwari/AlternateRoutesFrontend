@@ -1,0 +1,14 @@
+.flatpickr-day.selected {
+    background-color: #4CAF50; /* Change this to your desired color */
+    border-color: #4CAF50; /* Change this to your desired color */
+}
+  
+.flatpickr-day:hover {
+    background-color: #FF5722; /* Change this to your desired hover color */
+    border-color: #FF5722; /* Change this to your desired hover color */
+}
+
+.flatpickr-day.flatpickr-disabled {
+    color : rgb(72 72 72 / 38%)
+}
+  
