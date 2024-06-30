@@ -1,13 +1,52 @@
-import React, { useState }  from 'react'
+import React, { useState,useEffect }  from 'react'
 import './searchAreaDesktop.css'
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 import './FlatpickrCustom.css'
+import $ from 'jquery';
+// import 'flatpickr/dist/flatpickr.css';
+
 
 
 export default function searchAreaDesktop() {
+
+  const handleDateChange = (year) => {
+        return year < 1000 ? year + 1900 : year
+  };  
   
-  const [date, setDate] = useState(new Date());
+  const [schedule, setSchedule] = useState(new Date());
+  const [year, setYear] = useState(handleDateChange(schedule.getYear()));
+
+  useEffect(() => {
+    
+    
+
+    const handleClickOutside = (event) => {
+        if (!$(event.target).closest('.flatpickr-calendar, #Test').length) {
+          $('.flatpickr-calendar').removeClass('open');
+        }
+    };
+        // Initialize jQuery plugin
+    $('#Test').click(() => {
+           var position = $('#Test').offset();
+           $('.flatpickr-calendar').addClass('arrowTop arrowLeft open')
+           $(".flatpickr-calendar").css({
+                top: position.top + 40,
+                left: position.left,
+                display: 'block'
+           });
+    });
+
+        // Add event listener to the document
+    $(document).on('click', handleClickOutside);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      $(document).off('click', handleClickOutside);
+    };
+
+}, []);
+
   return (
     <div className="container mt-5">
           <div className="card mb-3">
@@ -42,15 +81,21 @@ export default function searchAreaDesktop() {
                                           <p>New Delhi Railway Station</p>
                                       </div>
                                   </div>
-                                  <div className="col-12 col-md-2 border-end">
+                                  <div className="col-12 col-md-2 border-end" id ="Test">
                                       <div className="d-flex flex-column">
-                                          <p>Travel Dates</p>
-                                          {/* <Calendar onChange={setDate} value={date} /> */}
+                                         <p>Trave Date</p>
+                                         <div className="d-lg-flex">
+                                         <p className="fs-2 fw-semibold">{schedule.getDate()}</p><p className="h-100 ms-1 mt-3">{schedule.toLocaleString('en-US', { month: 'short' }).toUpperCase()}</p>
+                                         {/* <p className="h-100 ms-1 mt-3">{schedule.getYear() < 1000 ? schedule.getYear()+1900 : schedule.getYear()}</p> */}
+                                         <p className="h-100 ms-1 mt-3">{year}</p>
+                                         </div>
+                                         
                                           <Flatpickr
                                                 data-enable-time
-                                                value={date}
+                                                value={schedule}
                                                 onChange={([selectedDate]) => {
-                                                setDate(selectedDate);
+                                                    setSchedule(selectedDate);
+                                                    setYear(handleDateChange(schedule.getYear()));
                                                 }}
                                                 options={{
                                                     dateFormat: 'Y-m-d',
@@ -58,7 +103,8 @@ export default function searchAreaDesktop() {
                                                     minDate: 'today',
                                                     maxDate: new Date().fp_incr(120)
                                                 }}
-                                        />
+                                          />
+                                          <p>Day</p>
                                       </div>
                                   </div>
                                   <div className="col-12 col-md-2">
