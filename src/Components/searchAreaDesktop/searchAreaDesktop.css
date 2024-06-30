@@ -42,9 +42,38 @@
 
 #wholeSearchArea{
     width: 80%;
-    margin-left : 9%
+    margin-left : 9%;
+    /* margin-top : 20 */
 }
 
 .dayText {
     margin-top: -20px;
 }
+
+#changeQuerySelector{
+    position: absolute;
+    z-index: 3;
+    /* width: 50%; */
+    margin-left: 30%;
+    margin-top: -4%;
+    width: 15%;
+}
+
+#changeTrainImage{
+    cursor: pointer;
+}
+
+#mainConatiner{
+    margin-top: 8%;
+}
+
+.selecetedImage{
+    margin-bottom: -8%;
+    
+}
+
+.highlight{
+    border-bottom: 3px solid black; 
+}
+
+
