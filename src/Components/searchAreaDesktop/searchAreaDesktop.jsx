@@ -4,9 +4,6 @@ import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 import './FlatpickrCustom.css'
 import $ from 'jquery';
-// import 'flatpickr/dist/flatpickr.css';
-
-
 
 export default function searchAreaDesktop() {
 
@@ -18,9 +15,7 @@ export default function searchAreaDesktop() {
   const [year, setYear] = useState(handleDateChange(schedule.getYear()));
 
   useEffect(() => {
-    
-    
-
+        
     const handleClickOutside = (event) => {
         if (!$(event.target).closest('.flatpickr-calendar, #Test').length) {
           $('.flatpickr-calendar').removeClass('open');
@@ -31,7 +26,7 @@ export default function searchAreaDesktop() {
            var position = $('#Test').offset();
            $('.flatpickr-calendar').addClass('arrowTop arrowLeft open')
            $(".flatpickr-calendar").css({
-                top: position.top + 40,
+                top: position.top + 150,
                 left: position.left,
                 display: 'block'
            });
@@ -86,7 +81,6 @@ export default function searchAreaDesktop() {
                                          <p>Trave Date</p>
                                          <div className="d-lg-flex">
                                          <p className="fs-2 fw-semibold">{schedule.getDate()}</p><p className="h-100 ms-1 mt-3">{schedule.toLocaleString('en-US', { month: 'short' }).toUpperCase()}</p>
-                                         {/* <p className="h-100 ms-1 mt-3">{schedule.getYear() < 1000 ? schedule.getYear()+1900 : schedule.getYear()}</p> */}
                                          <p className="h-100 ms-1 mt-3">{year}</p>
                                          </div>
                                          
