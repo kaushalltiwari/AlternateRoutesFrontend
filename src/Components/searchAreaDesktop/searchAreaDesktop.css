@@ -4,7 +4,7 @@
 }
 
 .queryInfo:hover {
-    background-color: #ff0000
+    background-color: #EAF5FF
 }  
 
 .test{
@@ -15,16 +15,16 @@
 
 .drp{
     /* position: none !important; */
-    margin-top: -50px !important;
+    margin-top: -80px !important;
     z-index: 3;
 }
 
 .topText {
-    margin-top: 5px;
+    padding-top: 10px;
 }
 
 .middleText{
-     margin-top:-10px
+     margin-top:-15px
 }
 
 .travelDate{
@@ -38,4 +38,13 @@
 
 #parent_cardBody{
      padding : 0px
+}
+
+#wholeSearchArea{
+    width: 80%;
+    margin-left : 9%
+}
+
+.dayText {
+    margin-top: -20px;
 }
