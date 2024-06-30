@@ -52,14 +52,14 @@ export default function searchAreaDesktop() {
           <div className="card mb-3">
               <div className="card-body pt-5">
                   <div className="card">
-                      <div className="card-body">
+                      <div className="card-body" id="parent_cardBody">
                           <div className="container">
                               <div className="row align-items-end">
                                   <div className="col-12 col-md-4 border-end queryInfo">
                                       <div className="dropdown">
                                           <div className="d-flex flex-column" role="button" data-bs-toggle="dropdown">
-                                              <p className="mb-n5">From</p>
-                                              <h3 className="mt-n5">Delhi</h3>
+                                              <p className="topText">From</p>
+                                              <h3 className="middleText">Delhi</h3>
                                               <p>New Delhi Railway Station</p>
                                           </div>
                                           <ul className="dropdown-menu w-100 drp">
@@ -70,18 +70,18 @@ export default function searchAreaDesktop() {
                                       </div>
                                   </div>
                                   <div className="col-12 col-md-4 border-end">
-                                      <div className="d-flex flex-column">
+                                      <div className="d-flex flex-column topText">
                                           <p>From</p>
-                                          <h3>Delhi</h3>
+                                          <h3 className="middleText" >Delhi</h3>
                                           <p>New Delhi Railway Station</p>
                                       </div>
                                   </div>
                                   <div className="col-12 col-md-2 border-end" id ="Test">
                                       <div className="d-flex flex-column">
-                                         <p>Trave Date</p>
-                                         <div className="d-lg-flex">
-                                         <p className="fs-2 fw-semibold">{schedule.getDate()}</p><p className="h-100 ms-1 mt-3">{schedule.toLocaleString('en-US', { month: 'short' }).toUpperCase()}</p>
-                                         <p className="h-100 ms-1 mt-3">{year}</p>
+                                         <p className="travelDate">Trave Date</p>
+                                         <div className="d-lg-flex" >
+                                            <p className="fs-2 fw-semibold">{schedule.getDate()}</p><p className="h-100 ms-1 mt-3">{schedule.toLocaleString('en-US', { month: 'short' }).toUpperCase()}</p>
+                                            <p className="h-100 ms-1 mt-3">{year}</p>
                                          </div>
                                          
                                           <Flatpickr
@@ -103,9 +103,9 @@ export default function searchAreaDesktop() {
                                   </div>
                                   <div className="col-12 col-md-2">
                                       <div className="d-flex flex-column">
-                                          <p>From</p>
+                                          <p className="topText">From</p>
                                           <h3>Delhi</h3>
-                                          <p>New Delhi Railway Station</p>
+                                          <p>New Delhi</p>
                                       </div>
                                   </div>
                               </div>
