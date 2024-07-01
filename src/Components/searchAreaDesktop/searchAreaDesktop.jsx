@@ -29,15 +29,15 @@ export default function searchAreaDesktop() {
 
     useEffect(() => {
 
-        const handleClickOutside = (event) => {
-            if (!$(event.target).closest('.flatpickr-calendar, #Test').length) {
-                $('.flatpickr-calendar').removeClass('open');
-                $('#checkTrains').addClass('highlight')
-            }
-        };
+        // const handleClickOutside = (event) => {
+        //     if (!$(event.target).closest('.flatpickr-calendar, #Test').length) {
+        //         $('.flatpickr-calendar').removeClass('open');
+        //         $('#checkTrains').addClass('highlight')
+        //     }
+        // };
         // Initialize jQuery plugin
-        $('#Test').click(() => {
-            var position = $('#Test').offset();
+        $('#calender').click(() => {
+            var position = $('#calender').offset();
             $('.flatpickr-calendar').addClass('arrowTop arrowLeft open')
             $(".flatpickr-calendar").css({
                 top: position.top + 120,
@@ -48,15 +48,16 @@ export default function searchAreaDesktop() {
 
         $("#changeTrainImage").click(() => {
             $("#changeTrainImage").attr("src", trainSelected)
+            $('#checkTrains').addClass('highlight')
         });
 
         // Add event listener to the document
-        $(document).on('click', handleClickOutside);
+        // $(document).on('click', handleClickOutside);
 
-        // Cleanup the event listener on component unmount
-        return () => {
-            $(document).off('click', handleClickOutside);
-        };
+        // // Cleanup the event listener on component unmount
+        // return () => {
+        //     $(document).off('click', handleClickOutside);
+        // };
 
 
 
@@ -68,11 +69,11 @@ export default function searchAreaDesktop() {
                 <div className="card-body">
                     <div className="d-flex align-items-center">
                         <div className="col col-md-6 text-center selecetedImage" id="checkTrains">
-                            <img src={trainUnselected} width="40" id="changeTrainImage" alt="Train" />
+                            <img src={trainUnselected} width="30" id="changeTrainImage" alt="Train" />
                             <p>Train</p>
                         </div>
                         <div className="col col-md-6 text-center selecetedImage">
-                            <img src={trainUnselected} width="40" id="" alt="Train" />
+                            <img src={trainUnselected} width="30" id="" alt="Train" />
                             <p>Train</p> 
                         </div>
                     </div>
@@ -116,7 +117,7 @@ export default function searchAreaDesktop() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div className="col-12 col-md-2 border-end queryInfo" id="Test">
+                                    <div className="col-12 col-md-2 border-end queryInfo" id="calender">
                                         <div className="d-flex flex-column">
                                             <p className="travelDate dropdown-toggle">Trave Date</p>
                                             <div className="d-lg-flex" >
@@ -156,13 +157,14 @@ export default function searchAreaDesktop() {
                                                 <li><a className="dropdown-item" href="#">First AC</a></li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
         </div>
     )
 }

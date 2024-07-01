@@ -7,11 +7,11 @@
     background-color: #EAF5FF
 }  
 
-.test{
+/* .test{
     margin-bottom: -10px;
     margin-left: 150px;
     margin-right: 150px;
-}
+} */
 
 .drp{
     /* position: none !important; */
@@ -76,4 +76,15 @@
     border-bottom: 3px solid black; 
 }
 
+#searchBtn{
+    width : 15%;
+    position: absolute;
+    z-index: 100;
+    border-radius: 30px;
+    margin-top: -2%;
+    margin-left: 33%;
+    height: 6%;
+    background-color: #008CFF;
+    font-size: 130%;
+}
 
