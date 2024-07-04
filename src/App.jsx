@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import SearchArea from './Components/SearchArea/searchArea.jsx'
 import Header from './header.jsx'
+import TrainDetails from './Components/TrainDetails/trainDetails.jsx'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -9,7 +10,8 @@ function App() {
   return (
     <>
       <Header></Header>
-      <SearchArea></SearchArea>
+      {/* <SearchArea></SearchArea> */}
+      <TrainDetails></TrainDetails>
     </>
   )
 }

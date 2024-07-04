@@ -29,13 +29,6 @@ export default function searchAreaDesktop() {
 
     useEffect(() => {
 
-        // const handleClickOutside = (event) => {
-        //     if (!$(event.target).closest('.flatpickr-calendar, #Test').length) {
-        //         $('.flatpickr-calendar').removeClass('open');
-        //         $('#checkTrains').addClass('highlight')
-        //     }
-        // };
-        // Initialize jQuery plugin
         $('#calender').click(() => {
             var position = $('#calender').offset();
             $('.flatpickr-calendar').addClass('arrowTop arrowLeft open')
@@ -50,15 +43,6 @@ export default function searchAreaDesktop() {
             $("#changeTrainImage").attr("src", trainSelected)
             $('#checkTrains').addClass('highlight')
         });
-
-        // Add event listener to the document
-        // $(document).on('click', handleClickOutside);
-
-        // // Cleanup the event listener on component unmount
-        // return () => {
-        //     $(document).off('click', handleClickOutside);
-        // };
-
 
 
     }, [trainSelected]);

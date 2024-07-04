@@ -1,0 +1,43 @@
+.line {
+    margin-top: 2.2%;
+}
+
+
+#lineRight{
+    padding-right: -3%;
+}
+
+#singleTrainDetailMainContainer{
+    width : 65%;
+    margin-bottom: 1%;
+    margin-left: 30%;
+}
+
+.singleTrainDetailTypeRevCard{
+    height: 60%;
+}
+
+#firstRow {
+    margin-bottom: -1.5%;
+}
+
+#secondRow {
+    font-size: 75%;
+}
+
+#viewRoutes {
+    padding-left : 5%
+}
+
+.availableUpdateTest {
+    font-size: 75%;
+}
+  
+.firstRowCommon{
+    margin-top:1%
+}
+
+#singleTrainDetailDuration {
+    padding-left : 10%
+}
+  

@@ -1,7 +1,12 @@
-import React from 'react'
+import React from 'react' 
+import SingleTrainDetail from './singleTrainDetail.jsx'
 
-export default function trainDetails() {
+export default function TrainDetails() {
   return (
-    <div className="container">trainDetails</div>
+    <div>
+        <SingleTrainDetail></SingleTrainDetail>
+        <SingleTrainDetail></SingleTrainDetail>
+        <SingleTrainDetail></SingleTrainDetail>
+    </div>
   )
 }
