@@ -1,5 +1,5 @@
 import React from 'react'
-import './singleTrainDetail.css'
+import './css/singleTrainDetail.css'
 
 export default function SingleTrainDetail() {
     return (

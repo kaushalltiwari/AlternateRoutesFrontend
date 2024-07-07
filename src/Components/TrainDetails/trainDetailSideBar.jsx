@@ -1,5 +1,5 @@
 import React from 'react'
-import './trainDetailSideBar.css'
+import './css/trainDetailSideBar.css'
 
 export default function TrainDetailSideBar() {
   return (

@@ -77,6 +77,7 @@ export default function searchAreaDesktop() {
                                                 <p className="dayText">{FromStation.stationCodeAndName}</p>
                                             </div>
                                             <ul className="dropdown-menu w-100 drp">
+                                                <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="From"/>
                                                 <li><a className="dropdown-item" href="#">Delhi</a></li>
                                                 <li><a className="dropdown-item" href="#">Mumbai</a></li>
                                                 <li><a className="dropdown-item" href="#">Kolkata</a></li>
