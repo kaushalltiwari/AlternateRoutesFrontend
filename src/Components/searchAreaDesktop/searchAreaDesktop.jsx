@@ -20,12 +20,25 @@ export default function searchAreaDesktop() {
             setToStation({ station: station, stationCodeAndName: stationCodeAndName });
         }
     };
+    
+    //Used For search in dropdown
+    const changeStationsAtDropDown = (event) => {
+        console.log('Value is:', event.target.value);
+        fetch(`http://localhost:3000/searchSation?stationName=${event.target.value}`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.hits.hits[0]._source)
+            })
+            .catch((error) => console.error(error));
 
+    }
 
     const [schedule, setSchedule] = useState(new Date());
     const [year, setYear] = useState(handleDateChange(schedule.getYear()));
     const [FromStation, setFromStation] = useState({ station: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
     const [ToStation, setToStation] = useState({ station: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
+    const [listedStations, setlistedStations] = useState(['Delhi','Kolkata','Mumbai'])
+    
 
     useEffect(() => {
 
@@ -77,19 +90,21 @@ export default function searchAreaDesktop() {
                                                 <p className="dayText">{FromStation.stationCodeAndName}</p>
                                             </div>
                                             <ul className="dropdown-menu w-100 drp">
-                                                <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="From"/>
-                                                <li><a className="dropdown-item" href="#">Delhi</a></li>
+                                                <input type="text" className="form-control" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown}/>
+                                                {/* <li><a className="dropdown-item" href="#">Delhi</a></li>
                                                 <li><a className="dropdown-item" href="#">Mumbai</a></li>
                                                 <li><a className="dropdown-item" href="#">Kolkata</a></li>
                                                 <li><a className="dropdown-item" href="#">Asansol</a></li>
-                                                <li><a className="dropdown-item" href="#">Dhanbad</a></li>
+                                                <li><a className="dropdown-item" href="#">Dhanbad</a></li> */}
+
+                                                
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-4 border-end queryInfo">
                                         <div className="dropdown">
                                             <div className="d-flex flex-column" role="button" data-bs-toggle="dropdown">
-                                                <p className="topText">From</p>
+                                                <p className="topText">To</p>
                                                 <p className="middleText fs-2 fw-semibold">{ToStation.station}</p>
                                                 <p className="dayText">{ToStation.stationCodeAndName}</p>
                                             </div>
@@ -149,7 +164,7 @@ export default function searchAreaDesktop() {
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
+            <button type="button" className="btn btn-primary" id="searchBtn">Search</button>
         </div>
     )
 }
