@@ -20,14 +20,19 @@ export default function searchAreaDesktop() {
             setToStation({ station: station, stationCodeAndName: stationCodeAndName });
         }
     };
-    
+
     //Used For search in dropdown
     const changeStationsAtDropDown = (event) => {
         console.log('Value is:', event.target.value);
         fetch(`http://localhost:3000/searchSation?stationName=${event.target.value}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.hits.hits[0]._source)
+                var stationsArray = data.hits.hits;
+                var extractStations = [];
+                for (var i=0;i<stationsArray.length;i++) {
+                    extractStations[i] = stationsArray[i]._source.StationName
+                }
+                setlistedStations(extractStations)
             })
             .catch((error) => console.error(error));
 
@@ -37,8 +42,8 @@ export default function searchAreaDesktop() {
     const [year, setYear] = useState(handleDateChange(schedule.getYear()));
     const [FromStation, setFromStation] = useState({ station: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
     const [ToStation, setToStation] = useState({ station: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
-    const [listedStations, setlistedStations] = useState(['Delhi','Kolkata','Mumbai'])
-    
+    const [listedStations, setlistedStations] = useState(['Delhi', 'Kolkata', 'Mumbai'])
+
 
     useEffect(() => {
 
@@ -71,7 +76,7 @@ export default function searchAreaDesktop() {
                         </div>
                         <div className="col col-md-6 text-center selecetedImage">
                             <img src={trainUnselected} width="30" id="" alt="Train" />
-                            <p>Train</p> 
+                            <p>Train</p>
                         </div>
                     </div>
                 </div>
@@ -90,14 +95,16 @@ export default function searchAreaDesktop() {
                                                 <p className="dayText">{FromStation.stationCodeAndName}</p>
                                             </div>
                                             <ul className="dropdown-menu w-100 drp">
-                                                <input type="text" className="form-control" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown}/>
+                                                <input type="text" className="form-control" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
                                                 {/* <li><a className="dropdown-item" href="#">Delhi</a></li>
                                                 <li><a className="dropdown-item" href="#">Mumbai</a></li>
                                                 <li><a className="dropdown-item" href="#">Kolkata</a></li>
                                                 <li><a className="dropdown-item" href="#">Asansol</a></li>
                                                 <li><a className="dropdown-item" href="#">Dhanbad</a></li> */}
+                                                {listedStations.map((value, index) => (
+                                                    <li><a className="dropdown-item" href="#">{value}</a></li>
+                                                ))}
 
-                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -157,7 +164,7 @@ export default function searchAreaDesktop() {
                                                 <li><a className="dropdown-item" href="#">First AC</a></li>
                                             </ul>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>
