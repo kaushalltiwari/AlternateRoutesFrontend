@@ -89,3 +89,29 @@
     font-size: 130%;
 }
 
+.station_items{
+    margin-bottom: -10px;
+    font-size: 93%;
+    padding: 3%;
+}
+
+
+
+.stations_dropdown{
+    height: 300%; /* Set your desired max height */
+    overflow-y: scroll;
+    --bs-dropdown-padding-y : 0;
+}
+
+.searchImage{
+    margin-top: 5%;
+    margin-left: 3%;
+    height: 12px;
+    width: 12px;
+}
+
+
+#fromStation {
+    border: white;
+}
+

@@ -6,6 +6,7 @@ import './FlatpickrCustom.css'
 import $ from 'jquery';
 import trainSelected from '../../assets/icons/trainSelected.png';
 import trainUnselected from '../../assets/icons/trainUnselected.png';
+import search from '../../assets/icons/search.png'
 
 export default function searchAreaDesktop() {
 
@@ -15,9 +16,9 @@ export default function searchAreaDesktop() {
 
     const dropdownChange = (station, stationCodeAndName, sourceDestination) => {
         if (sourceDestination == "source") {
-            setFromStation({ station: station, stationCodeAndName: stationCodeAndName });
+            setFromStation({ city: station, stationCodeAndName: stationCodeAndName });
         } else {
-            setToStation({ station: station, stationCodeAndName: stationCodeAndName });
+            setToStation({ city: station, stationCodeAndName: stationCodeAndName });
         }
     };
 
@@ -30,7 +31,8 @@ export default function searchAreaDesktop() {
                 var stationsArray = data.hits.hits;
                 var extractStations = [];
                 for (var i=0;i<stationsArray.length;i++) {
-                    extractStations[i] = stationsArray[i]._source.StationName
+                    extractStations[i] =  { "id" : stationsArray[i]._id,"StationName" : stationsArray[i]._source.StationName,"StationCode" : stationsArray[i]._source.StationCode,"cityName" : stationsArray[i]._source.cityName }
+                        
                 }
                 setlistedStations(extractStations)
             })
@@ -40,9 +42,9 @@ export default function searchAreaDesktop() {
 
     const [schedule, setSchedule] = useState(new Date());
     const [year, setYear] = useState(handleDateChange(schedule.getYear()));
-    const [FromStation, setFromStation] = useState({ station: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
-    const [ToStation, setToStation] = useState({ station: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
-    const [listedStations, setlistedStations] = useState(['Delhi', 'Kolkata', 'Mumbai'])
+    const [FromStation, setFromStation] = useState({ city: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
+    const [ToStation, setToStation] = useState({ city: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
+    const [listedStations, setlistedStations] = useState([{"id":"1","StationName" : "New Delhi JN","StationCode" : "NLDS","cityName" : "Delhi"},{"id":"2","StationName" : "Howrah JN","StationCode" : "HWH","cityName" : "Kolkata"},{"id":"3","StationName" : "Burnpur","StationCode" : "BURN","cityName" : "Asansol"}])
 
 
     useEffect(() => {
@@ -55,13 +57,26 @@ export default function searchAreaDesktop() {
                 left: position.left,
                 display: 'block'
             });
+
         });
+
+        // $(document).on('click', (event) => {
+        //     const target = $(event.target);
+        //     const calendar = $('.flatpickr-calendar');
+    
+        //     // Check if the clicked element is outside the calendar
+        //     if (!target.is('#calender') && calendar.hasClass('open')) {
+        //         calendar.removeClass('open'); // Hide the calendar
+        //     }
+        // });
 
         $("#changeTrainImage").click(() => {
             $("#changeTrainImage").attr("src", trainSelected)
             $('#checkTrains').addClass('highlight')
         });
-
+        
+            // Add a click event listener to the document
+    
 
     }, [trainSelected]);
 
@@ -91,20 +106,20 @@ export default function searchAreaDesktop() {
                                         <div className="dropdown">
                                             <div className="d-flex flex-column" role="button" data-bs-toggle="dropdown">
                                                 <p className="topText">From</p>
-                                                <p className="middleText fs-2 fw-semibold">{FromStation.station}</p>
+                                                <p className="middleText fs-2 fw-semibold">{FromStation.city}</p>
                                                 <p className="dayText">{FromStation.stationCodeAndName}</p>
                                             </div>
-                                            <ul className="dropdown-menu w-100 drp">
-                                                <input type="text" className="form-control" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
-                                                {/* <li><a className="dropdown-item" href="#">Delhi</a></li>
-                                                <li><a className="dropdown-item" href="#">Mumbai</a></li>
-                                                <li><a className="dropdown-item" href="#">Kolkata</a></li>
-                                                <li><a className="dropdown-item" href="#">Asansol</a></li>
-                                                <li><a className="dropdown-item" href="#">Dhanbad</a></li> */}
-                                                {listedStations.map((value, index) => (
-                                                    <li><a className="dropdown-item" href="#">{value}</a></li>
+                                            <ul className="dropdown-menu w-100 drp stations_dropdown">
+                                                <div class="d-flex">
+                                                    <img src={search}  class="searchImage"></img>
+                                                    <input type="text" className="form-control sticky-top" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
+                                                </div>
+                                                {listedStations.map((value) => (
+                                                    <li className="dropdown-item d-flex station_items" key={value.id}  onClick={() => dropdownChange(value.cityName, value.StationCode+','+value.StationName, 'source')}>
+                                                        <p className="col-8 h-1">{value.cityName}<br/>{value.StationName}</p>
+                                                        <p className="col-4 text-end">{value.StationCode}</p>
+                                                    </li>
                                                 ))}
-
                                             </ul>
                                         </div>
                                     </div>
@@ -112,15 +127,20 @@ export default function searchAreaDesktop() {
                                         <div className="dropdown">
                                             <div className="d-flex flex-column" role="button" data-bs-toggle="dropdown">
                                                 <p className="topText">To</p>
-                                                <p className="middleText fs-2 fw-semibold">{ToStation.station}</p>
+                                                <p className="middleText fs-2 fw-semibold">{ToStation.city}</p>
                                                 <p className="dayText">{ToStation.stationCodeAndName}</p>
                                             </div>
-                                            <ul className="dropdown-menu w-100 drp">
-                                                <li><a className="dropdown-item" href="#" onClick={() => dropdownChange('Delhi', 'NLDS, New Delhi Railway Station', 'destination')}>Delhi</a></li>
-                                                <li><a className="dropdown-item" href="#" onClick={() => dropdownChange('Mumbai', 'CSTM, Mumbai - All Stations', 'destination')}>Mumbai</a></li>
-                                                <li><a className="dropdown-item" href="#">Kolkata</a></li>
-                                                <li><a className="dropdown-item" href="#">Asansol</a></li>
-                                                <li><a className="dropdown-item" href="#">Dhanbad</a></li>
+                                            <ul className="dropdown-menu w-100 drp stations_dropdown">
+                                                <div class="d-flex">
+                                                    <img src={search}  class="searchImage"></img>
+                                                    <input type="text" className="form-control sticky-top" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
+                                                </div>
+                                                {listedStations.map((value) => (
+                                                    <li className="dropdown-item d-flex station_items" key={value.id}  onClick={() => dropdownChange(value.cityName, value.StationCode+','+value.StationName, 'destination')}>
+                                                        <p className="col-8 h-1">{value.cityName}<br/>{value.StationName}</p>
+                                                        <p className="col-4 text-end">{value.StationCode}</p>
+                                                    </li>
+                                                ))}
                                             </ul>
                                         </div>
                                     </div>
