@@ -10,10 +10,10 @@ export default function TrainDetails(source, destination, date) {
             {/* <TrainSearchBox></TrainSearchBox> */}
             <Header></Header>
             <div className='container row'>
-                <div class="col-md-4">
+                <div className="col-md-4">
                     <TrainDetailSideBar></TrainDetailSideBar>
                 </div>
-                <div class="col-md-8">
+                <div className="col-md-8">
                     <SingleTrainDetail></SingleTrainDetail>
                     <SingleTrainDetail></SingleTrainDetail>
                     <SingleTrainDetail></SingleTrainDetail>

@@ -7,8 +7,16 @@ import $ from 'jquery';
 import trainSelected from '../../assets/icons/trainSelected.png';
 import trainUnselected from '../../assets/icons/trainUnselected.png';
 import search from '../../assets/icons/search.png'
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import {FromStationState, ToStationState, listedStationsState, scheduleState} from '../../store/atoms/trainSearchInfo.js'
 
 export default function searchAreaDesktop() {
+    const navigate = useNavigate();
+
+    const searchTrains = () => {
+        navigate('/listing'); 
+    }
 
     const handleYear = (year) => {
         return year < 1000 ? year + 1900 : year
@@ -18,11 +26,11 @@ export default function searchAreaDesktop() {
         return  month+1 < 10 ? '0'+(month+1) : month+1 
     };
 
-    const dropdownChange = (station, stationCodeAndName, sourceDestination) => {
+    const dropdownChange = (station, stationName, stationCode, sourceDestination) => {
         if (sourceDestination == "source") {
-            setFromStation({ city: station, stationCodeAndName: stationCodeAndName });
+            setFromStation({ city: station, stationName: stationName , stationCode : stationCode });
         } else {
-            setToStation({ city: station, stationCodeAndName: stationCodeAndName });
+            setToStation({ city: station, stationName: stationName , stationCode : stationCode });
         }
     };
 
@@ -43,16 +51,23 @@ export default function searchAreaDesktop() {
             .catch((error) => console.error(error));
 
     }
-
-    const [schedule, setSchedule] = useState(new Date());
-    const [yearMonthDayDateFormat, setYearMonthDayDateFormat] = useState(schedule.getYear()+''+handlMonth(schedule.getMonth())+''+schedule.getDate())
-    const [year, setYear] = useState(handleYear(schedule.getYear()));
-    const [FromStation, setFromStation] = useState({ city: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
-    const [ToStation, setToStation] = useState({ city: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
-    const [listedStations, setlistedStations] = useState([{"id":"1","StationName" : "New Delhi JN","StationCode" : "NLDS","cityName" : "Delhi"},{"id":"2","StationName" : "Howrah JN","StationCode" : "HWH","cityName" : "Kolkata"},{"id":"3","StationName" : "Burnpur","StationCode" : "BURN","cityName" : "Asansol"}])
+    
+    const init = () => {
+        setschedule({
+            date : schedule.date,
+            yearMonthDayDateFormat : schedule.date.getYear()+''+handlMonth(schedule.date.getMonth())+''+schedule.date.getDate(),
+            year : handleYear(schedule.date.getYear())
+        })
+    }
+    const [schedule, setschedule] = useRecoilState(scheduleState);
+    const [FromStation, setFromStation] = useRecoilState(FromStationState);
+    const [ToStation, setToStation] = useRecoilState(ToStationState);
+    const [listedStations, setListedStations] = useRecoilState(listedStationsState);
 
 
     useEffect(() => {
+       
+        init();
 
         $('#calender').click(() => {
             var position = $('#calender').offset();
@@ -65,22 +80,10 @@ export default function searchAreaDesktop() {
 
         });
 
-        // $(document).on('click', (event) => {
-        //     const target = $(event.target);
-        //     const calendar = $('.flatpickr-calendar');
-    
-        //     // Check if the clicked element is outside the calendar
-        //     if (!target.is('#calender') && calendar.hasClass('open')) {
-        //         calendar.removeClass('open'); // Hide the calendar
-        //     }
-        // });
-
         $("#changeTrainImage").click(() => {
             $("#changeTrainImage").attr("src", trainSelected)
             $('#checkTrains').addClass('highlight')
         });
-        
-            // Add a click event listener to the document
     
 
     }, [trainSelected]);
@@ -112,7 +115,7 @@ export default function searchAreaDesktop() {
                                             <div className="d-flex flex-column" role="button" data-bs-toggle="dropdown">
                                                 <p className="topText">From</p>
                                                 <p className="middleText fs-2 fw-semibold">{FromStation.city}</p>
-                                                <p className="dayText">{FromStation.stationCodeAndName}</p>
+                                                <p className="dayText">{FromStation.stationCode+','+FromStation.stationName}</p>
                                             </div>
                                             <ul className="dropdown-menu w-100 drp stations_dropdown">
                                                 <div className="d-flex">
@@ -120,7 +123,7 @@ export default function searchAreaDesktop() {
                                                     <input type="text" className="form-control sticky-top" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
                                                 </div>
                                                 {listedStations.map((value) => (
-                                                    <li className="dropdown-item d-flex station_items" key={value.id}  onClick={() => dropdownChange(value.cityName, value.StationCode+','+value.StationName, 'source')}>
+                                                    <li className="dropdown-item d-flex station_items" key={value.id}  onClick={() => dropdownChange(value.cityName, value.StationName, value.StationCode, 'source')}>
                                                         <p className="col-8 h-1">{value.cityName}<br/>{value.StationName}</p>
                                                         <p className="col-4 text-end">{value.StationCode}</p>
                                                     </li>
@@ -133,7 +136,7 @@ export default function searchAreaDesktop() {
                                             <div className="d-flex flex-column" role="button" data-bs-toggle="dropdown">
                                                 <p className="topText">To</p>
                                                 <p className="middleText fs-2 fw-semibold">{ToStation.city}</p>
-                                                <p className="dayText">{ToStation.stationCodeAndName}</p>
+                                                <p className="dayText">{ToStation.stationCode+','+ToStation.stationName}</p>
                                             </div>
                                             <ul className="dropdown-menu w-100 drp stations_dropdown">
                                                 <div className="d-flex">
@@ -141,7 +144,7 @@ export default function searchAreaDesktop() {
                                                     <input type="text" className="form-control sticky-top" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
                                                 </div>
                                                 {listedStations.map((value) => (
-                                                    <li className="dropdown-item d-flex station_items" key={value.id}  onClick={() => dropdownChange(value.cityName, value.StationCode+','+value.StationName, 'destination')}>
+                                                    <li className="dropdown-item d-flex station_items" key={value.id}  onClick={() => dropdownChange(value.cityName, value.StationName, value.StationCode, 'destination')}>
                                                         <p className="col-8 h-1">{value.cityName}<br/>{value.StationName}</p>
                                                         <p className="col-4 text-end">{value.StationCode}</p>
                                                     </li>
@@ -153,17 +156,19 @@ export default function searchAreaDesktop() {
                                         <div className="d-flex flex-column">
                                             <p className="travelDate dropdown-toggle">Trave Date</p>
                                             <div className="d-lg-flex" >
-                                                <p className="fs-2 fw-semibold">{schedule.getDate()}</p><p className="ms-1 mt-3">{schedule.toLocaleString('en-US', { month: 'short' }).toUpperCase()}</p>
-                                                <p className="ms-1 mt-3">{year}</p>
+                                                <p className="fs-2 fw-semibold">{schedule.date.getDate()}</p><p className="ms-1 mt-3">{schedule.date.toLocaleString('en-US', { month: 'short' }).toUpperCase()}</p>
+                                                <p className="ms-1 mt-3">{schedule.year}</p>
                                             </div>
 
                                             <Flatpickr
                                                 data-enable-time
-                                                value={schedule}
+                                                value={schedule.date}
                                                 onChange={([selectedDate]) => {
-                                                    setSchedule(selectedDate);
-                                                    setYear(handleYear(selectedDate.getYear()));
-                                                    setYearMonthDayDateFormat(selectedDate.getYear()+''+handlMonth(selectedDate.getMonth())+''+selectedDate.getDate())
+                                                    setschedule({
+                                                        date : selectedDate,
+                                                        yearMonthDayDateFormat : selectedDate.getYear()+''+handlMonth(selectedDate.getMonth())+''+selectedDate.getDate(),
+                                                        year : handleYear(selectedDate.getYear())
+                                                    });
                                                 }}
                                                 options={{
                                                     dateFormat: 'Y-m-d',
@@ -197,7 +202,7 @@ export default function searchAreaDesktop() {
                     </div>
                 </div>
             </div>
-            <button type="button" className="btn btn-primary" id="searchBtn">Search</button>
+            <button type="button" className="btn btn-primary" id="searchBtn" onClick={searchTrains}>Search</button>
         </div>
     )
 }
