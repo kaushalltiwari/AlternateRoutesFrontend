@@ -10,8 +10,12 @@ import search from '../../assets/icons/search.png'
 
 export default function searchAreaDesktop() {
 
-    const handleDateChange = (year) => {
+    const handleYear = (year) => {
         return year < 1000 ? year + 1900 : year
+    };
+
+    const handlMonth = (month) => {
+        return  month+1 < 10 ? '0'+(month+1) : month+1 
     };
 
     const dropdownChange = (station, stationCodeAndName, sourceDestination) => {
@@ -41,7 +45,8 @@ export default function searchAreaDesktop() {
     }
 
     const [schedule, setSchedule] = useState(new Date());
-    const [year, setYear] = useState(handleDateChange(schedule.getYear()));
+    const [yearMonthDayDateFormat, setYearMonthDayDateFormat] = useState(schedule.getYear()+''+handlMonth(schedule.getMonth())+''+schedule.getDate())
+    const [year, setYear] = useState(handleYear(schedule.getYear()));
     const [FromStation, setFromStation] = useState({ city: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
     const [ToStation, setToStation] = useState({ city: "Delhi", stationCodeAndName: "NLDS, New Delhi Railway Station" });
     const [listedStations, setlistedStations] = useState([{"id":"1","StationName" : "New Delhi JN","StationCode" : "NLDS","cityName" : "Delhi"},{"id":"2","StationName" : "Howrah JN","StationCode" : "HWH","cityName" : "Kolkata"},{"id":"3","StationName" : "Burnpur","StationCode" : "BURN","cityName" : "Asansol"}])
@@ -110,8 +115,8 @@ export default function searchAreaDesktop() {
                                                 <p className="dayText">{FromStation.stationCodeAndName}</p>
                                             </div>
                                             <ul className="dropdown-menu w-100 drp stations_dropdown">
-                                                <div class="d-flex">
-                                                    <img src={search}  class="searchImage"></img>
+                                                <div className="d-flex">
+                                                    <img src={search}  className="searchImage"></img>
                                                     <input type="text" className="form-control sticky-top" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
                                                 </div>
                                                 {listedStations.map((value) => (
@@ -131,8 +136,8 @@ export default function searchAreaDesktop() {
                                                 <p className="dayText">{ToStation.stationCodeAndName}</p>
                                             </div>
                                             <ul className="dropdown-menu w-100 drp stations_dropdown">
-                                                <div class="d-flex">
-                                                    <img src={search}  class="searchImage"></img>
+                                                <div className="d-flex">
+                                                    <img src={search}  className="searchImage"></img>
                                                     <input type="text" className="form-control sticky-top" id="fromStation" placeholder="From" onChange={changeStationsAtDropDown} />
                                                 </div>
                                                 {listedStations.map((value) => (
@@ -157,7 +162,8 @@ export default function searchAreaDesktop() {
                                                 value={schedule}
                                                 onChange={([selectedDate]) => {
                                                     setSchedule(selectedDate);
-                                                    setYear(handleDateChange(schedule.getYear()));
+                                                    setYear(handleYear(selectedDate.getYear()));
+                                                    setYearMonthDayDateFormat(selectedDate.getYear()+''+handlMonth(selectedDate.getMonth())+''+selectedDate.getDate())
                                                 }}
                                                 options={{
                                                     dateFormat: 'Y-m-d',
