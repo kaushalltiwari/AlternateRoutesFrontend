@@ -8,7 +8,7 @@ import trainSelected from '../../assets/icons/trainSelected.png';
 import trainUnselected from '../../assets/icons/trainUnselected.png';
 import search from '../../assets/icons/search.png'
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import {FromStationState, ToStationState, listedStationsState, scheduleState} from '../../store/atoms/trainSearchInfo.js'
 
 export default function searchAreaDesktop() {
@@ -55,14 +55,24 @@ export default function searchAreaDesktop() {
     const init = () => {
         setschedule({
             date : schedule.date,
-            yearMonthDayDateFormat : schedule.date.getYear()+''+handlMonth(schedule.date.getMonth())+''+schedule.date.getDate(),
+            yearMonthDayDateFormat : `${handleYear(schedule.date.getYear())}${handlMonth(schedule.date.getMonth())}${schedule.date.getDate()}`,
             year : handleYear(schedule.date.getYear())
         })
+
     }
-    const [schedule, setschedule] = useRecoilState(scheduleState);
-    const [FromStation, setFromStation] = useRecoilState(FromStationState);
-    const [ToStation, setToStation] = useRecoilState(ToStationState);
-    const [listedStations, setListedStations] = useRecoilState(listedStationsState);
+    
+    const setschedule = useSetRecoilState(scheduleState);
+    const setFromStation = useSetRecoilState(FromStationState);
+    const setToStation = useSetRecoilState(ToStationState);
+    const setListedStations = useSetRecoilState(listedStationsState);
+    const schedule = useRecoilValue(scheduleState);
+    const FromStation = useRecoilValue(FromStationState);
+    const ToStation = useRecoilValue(ToStationState);
+    const listedStations = useRecoilValue(listedStationsState);
+    // const [schedule, setschedule] = useRecoilState(scheduleState);
+    // const [FromStation, setFromStation] = useRecoilState(FromStationState);
+    // const [ToStation, setToStation] = useRecoilState(ToStationState);
+    // const [listedStations, setListedStations] = useRecoilState(listedStationsState);
 
 
     useEffect(() => {
@@ -77,7 +87,7 @@ export default function searchAreaDesktop() {
                 left: position.left,
                 display: 'block'
             });
-
+            // console.log('Schedule:', schedule.yearMonthDayDateFormat);
         });
 
         $("#changeTrainImage").click(() => {
@@ -166,7 +176,7 @@ export default function searchAreaDesktop() {
                                                 onChange={([selectedDate]) => {
                                                     setschedule({
                                                         date : selectedDate,
-                                                        yearMonthDayDateFormat : selectedDate.getYear()+''+handlMonth(selectedDate.getMonth())+''+selectedDate.getDate(),
+                                                        yearMonthDayDateFormat : handleYear(selectedDate.getYear())+''+handlMonth(selectedDate.getMonth())+''+selectedDate.getDate(),
                                                         year : handleYear(selectedDate.getYear())
                                                     });
                                                 }}
