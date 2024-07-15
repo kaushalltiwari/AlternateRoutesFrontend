@@ -35,3 +35,10 @@ export const DirectTrainDetailsState = atom({
     },
 });
 
+export const DirectAvailableTrainsState = atom({
+  key: 'DirectAvailableTrains',
+  default: { 
+     availableTrains : []  
+  },
+});
+

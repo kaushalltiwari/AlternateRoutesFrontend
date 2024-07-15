@@ -1,3 +1,8 @@
 #trainDetailSideBar {
     margin-left: 10%;
 }
+
+.scroll-container {
+    max-width: 300%;
+    overflow-x: auto;
+}

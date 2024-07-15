@@ -114,52 +114,8 @@ export default function SingleTrainDetail(prop) {
                         <a href="#" className="col-md-2" id="viewRoutes">View Route</a>
                         <p className="col-md-3" id="singleTrainDetailDuration">New Delhi (NDLS)</p>
                     </div>
-                    <div className="row">
+                    <div className="row d-flex flex-row flex-nowrap scroll-container">
                         <TicketDetailscard></TicketDetailscard>
-                        <TicketDetailscard></TicketDetailscard>
-                        {/* <div className="col-md-3">
-                            <div className="card">
-                                <div className="card-body shadow singleTrainDetailTypeRevCard">
-                                    <div className="row">
-                                        <p className="card-title fw-bold col-md-6">2A</p>
-                                        <p className="card-text col-md-6">₹ 4245</p>
-                                    </div>
-                                    <div className="availableUpdateTest">
-                                        <p className="card-text">AVAILABLE 6</p>
-                                        <p className="card-text">Updated 3 hrs ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="col-md-3">
-                            <div className="card">
-                                <div className="card-body shadow singleTrainDetailTypeRevCard">
-                                    <div className="row">
-                                        <p className="card-title fw-bold col-md-6">1A</p>
-                                        <p className="card-text col-md-6">₹ 5275</p>
-                                    </div>
-                                    <div className="availableUpdateTest">
-                                        <p className="card-text">GNWL 1</p>
-                                        <p className="card-text">Updated 7 hrs ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-3">
-                            <div className="card">
-                                <div className="card-body shadow singleTrainDetailTypeRevCard">
-                                    <div className="row">
-                                        <p className="card-title fw-bold col-md-6">1A</p>
-                                        <p className="card-text col-md-6">₹ 5275</p>
-                                    </div>
-                                    <div className="availableUpdateTest">
-                                        <p className="card-text">GNWL 1</p>
-                                        <p className="card-text">Updated 7 hrs ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        
                     </div>
                 </div>
             </div>
