@@ -50,27 +50,31 @@ function FetchTrainDetails() {
     }
 
     useEffect(() => {
+        
+        const fetchTrainDetails = async () => {
+            fetch('http://localhost:3000/getAllDirectTrains', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(params)
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data)
+                    setDirectTrainDetails(data)
+                })
+                .catch((error) => console.error(error));
+        }
 
         if (!hasFetched.current) {
             hasFetched.current = true;
-        fetch('http://localhost:3000/getAllDirectTrains', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(params)
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data)
-                setDirectTrainDetails(data)
-            })
-            .catch((error) => console.error(error));
+            fetchTrainDetails();
         }
     }, []);
 
