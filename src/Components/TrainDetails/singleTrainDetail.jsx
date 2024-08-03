@@ -90,9 +90,9 @@ export default function SingleTrainDetail(prop) {
                     </div>
                     <div className="row" id="secondRow">
                         <p className="col-md-4">#{prop.trainDetails.trainNumber} | Departs on : <Schedule schedule={daySchedule} /></p>
-                        <p className="col-md-3">Mumbai Central (MMCT)</p>
+                        <p className="col-md-3">{prop.fromStationName} ({prop.fromStationCode})</p>
                         <a href="#" className="col-md-2" id="viewRoutes">View Route</a>
-                        <p className="col-md-3" id="singleTrainDetailDuration">New Delhi (NDLS)</p>
+                        <p className="col-md-3" id="singleTrainDetailDuration">{prop.toStationName} ({prop.toStationCode})</p>
                     </div>
                     <p className="col-md-4 fw-bolder">Available Classes</p>
                     <div className="row d-flex flex-row flex-nowrap scroll-container">

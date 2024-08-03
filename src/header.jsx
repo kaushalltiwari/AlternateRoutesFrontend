@@ -1,29 +1,27 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  
+  const navigate = useNavigate();
+
+  const returnHome = () => {
+    navigate('/'); 
+  }
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div className="container-fluid">
-      <a className="navbar-brand" href="#">Navbar</a>
+      <a className="navbar-brand" href="#" onClick={returnHome}>Ticket</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav mr-auto">
+        {/* <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <a className="nav-link" href="#">HOME</a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">ABOUT</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">PORTFOLIO</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">CONTACT</a>
-          </li>
-        </ul>
-        <button className="btn btn-primary" type="button">SIGN UP</button>
+        </ul> */}
       </div>
     </div>
   </nav>

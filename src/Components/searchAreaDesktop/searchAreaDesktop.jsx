@@ -10,6 +10,7 @@ import search from '../../assets/icons/search.png'
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import {FromStationState, ToStationState, listedStationsState, scheduleState} from '../../store/atoms/trainSearchInfo.js'
+import MainPic from '../../assets/Images/MainPic.jpg' 
 
 export default function searchAreaDesktop() {
     const navigate = useNavigate();
@@ -25,12 +26,17 @@ export default function searchAreaDesktop() {
     const handlMonth = (month) => {
         return  month+1 < 10 ? '0'+(month+1) : month+1 
     };
-
+    
+    function removeJn(stationName) {
+        return stationName.replace(' Jn', '').replace(' Railway Station','');
+    }
+    
+    
     const dropdownChange = (station, stationName, stationCode, sourceDestination) => {
         if (sourceDestination == "source") {
-            setFromStation({ city: station, stationName: stationName , stationCode : stationCode });
+            setFromStation({ city: removeJn(stationName), stationName: `${removeJn(stationName)} Railway Station` , stationCode : stationCode });
         } else {
-            setToStation({ city: station, stationName: stationName , stationCode : stationCode });
+            setToStation({ city: removeJn(stationName), stationName: `${removeJn(stationName)} Railway Station` , stationCode : stationCode });
         }
     };
 
@@ -43,7 +49,7 @@ export default function searchAreaDesktop() {
                 var stationsArray = data.hits.hits;
                 var extractStations = [];
                 for (var i=0;i<stationsArray.length;i++) {
-                    extractStations[i] =  { "id" : stationsArray[i]._id,"StationName" : stationsArray[i]._source.StationName,"StationCode" : stationsArray[i]._source.StationCode,"cityName" : stationsArray[i]._source.cityName }
+                    extractStations[i] =  { "id" : stationsArray[i]._id,"StationName" : `${removeJn(stationsArray[i]._source.StationName)} Railway Station`,"StationCode" : stationsArray[i]._source.StationCode,"cityName" : removeJn(stationsArray[i]._source.StationName) }
                         
                 }
                 setListedStations(extractStations)
@@ -99,6 +105,9 @@ export default function searchAreaDesktop() {
     }, [trainSelected]);
 
     return (
+        <div class="container" id="parentContainer">
+            <img src={MainPic} class="img-fluid" id="mainPic"></img>
+        
         <div className="container" id="mainConatiner">
             {/* <div className="card shadow bg-body-tertiary rounded" id="changeQuerySelector">
                 <div className="card-body">
@@ -115,6 +124,7 @@ export default function searchAreaDesktop() {
                 </div>
             </div> */}
             <div className="card mb-3" id="wholeSearchArea">
+                
                 <div className="card-body pt-5">
                     <div className="card">
                         <div className="card-body" id="parent_cardBody">
@@ -213,6 +223,7 @@ export default function searchAreaDesktop() {
                 </div>
             </div>
             <button type="button" className="btn btn-primary" id="searchBtn" onClick={searchTrains}>Search</button>
+        </div>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import SingleTrainDetail from './singleTrainDetail.jsx'
 import TrainDetailSideBar from './trainDetailSideBar.jsx'
 import TrainSearchBox from './trainSearchBox.jsx'
 import Header from '../../header.jsx'
-import { FromStationState, ToStationState, scheduleState, DirectTrainDetailsState } from '../../store/atoms/trainSearchInfo.js'
+import { FromStationState, ToStationState, scheduleState, DirectTrainDetailsState} from '../../store/atoms/trainSearchInfo.js'
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import DirectAvailabletrains from './directAvailabletrains.jsx'
 
@@ -11,6 +11,8 @@ export default function TrainDetails() {
 
     const DirectTrainDetails = useRecoilValue(DirectTrainDetailsState);
     const schedule = useRecoilValue(scheduleState);
+    const ToStation = useRecoilValue(ToStationState);
+    const FromStation = useRecoilValue(FromStationState);
 
     return (
         
@@ -26,7 +28,7 @@ export default function TrainDetails() {
                 <div className="col-md-8">
                     {/* <DirectAvailabletrains></DirectAvailabletrains> */}
                     {DirectTrainDetails.trainBtwnStnsList.map((item) => (
-                        <SingleTrainDetail key={item.trainNumber} trainDetails={item} date={schedule.date}/>
+                        <SingleTrainDetail key={item.trainNumber} trainDetails={item} date={schedule.date} toStationName = {ToStation.city} toStationCode = {ToStation.stationCode} fromStationName={FromStation.city} fromStationCode={FromStation.stationCode}/>
                     ))}
                 </div>
             </div>
