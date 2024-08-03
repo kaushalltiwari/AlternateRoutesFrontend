@@ -46,7 +46,7 @@ export default function searchAreaDesktop() {
                     extractStations[i] =  { "id" : stationsArray[i]._id,"StationName" : stationsArray[i]._source.StationName,"StationCode" : stationsArray[i]._source.StationCode,"cityName" : stationsArray[i]._source.cityName }
                         
                 }
-                setlistedStations(extractStations)
+                setListedStations(extractStations)
             })
             .catch((error) => console.error(error));
 
@@ -100,7 +100,7 @@ export default function searchAreaDesktop() {
 
     return (
         <div className="container" id="mainConatiner">
-            <div className="card shadow bg-body-tertiary rounded" id="changeQuerySelector">
+            {/* <div className="card shadow bg-body-tertiary rounded" id="changeQuerySelector">
                 <div className="card-body">
                     <div className="d-flex align-items-center">
                         <div className="col col-md-6 text-center selecetedImage" id="checkTrains">
@@ -113,7 +113,7 @@ export default function searchAreaDesktop() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="card mb-3" id="wholeSearchArea">
                 <div className="card-body pt-5">
                     <div className="card">

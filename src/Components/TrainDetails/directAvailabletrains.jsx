@@ -7,7 +7,7 @@ export default function DirectAvailabletrains() {
     return (
         <div>
             <FetchDirectAvailableTrains></FetchDirectAvailableTrains>
-            {/* <SingleTrainDetail></SingleTrainDetail> */}
+            <SingleTrainDetail></SingleTrainDetail>
         </div>
     )
 }

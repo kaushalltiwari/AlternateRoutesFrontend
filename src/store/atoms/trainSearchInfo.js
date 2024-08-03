@@ -42,3 +42,9 @@ export const DirectAvailableTrainsState = atom({
   },
 });
 
+export const PerTrainDetailsState = atom({
+  key: 'PerTrainDetails',
+  default: { 
+     availableInAllClass : []  
+  },
+});

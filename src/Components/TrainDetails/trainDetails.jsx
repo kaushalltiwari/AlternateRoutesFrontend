@@ -24,7 +24,7 @@ export default function TrainDetails() {
                 </div>
                 
                 <div className="col-md-8">
-                    <DirectAvailabletrains></DirectAvailabletrains>
+                    {/* <DirectAvailabletrains></DirectAvailabletrains> */}
                     {DirectTrainDetails.trainBtwnStnsList.map((item) => (
                         <SingleTrainDetail key={item.trainNumber} trainDetails={item} date={schedule.date}/>
                     ))}
